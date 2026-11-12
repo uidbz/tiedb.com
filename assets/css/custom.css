@@ -525,6 +525,11 @@ a {
 }
 
 .t-grad {
+  /* The gradient is painted only inside the span's box. A tight line-height
+     leaves the descender of "g" outside that box, so give the background a
+     little room and pull the layout back up. */
+  padding-bottom: 0.22em;
+  margin-bottom: -0.22em;
   background: linear-gradient(96deg, #e6a23c 4%, #f0c27a 32%, #2dd4bf 78%, #5eead4 100%);
   -webkit-background-clip: text;
   background-clip: text;
