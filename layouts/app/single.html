@@ -1,0 +1,93 @@
+{{ define "main" }}
+{{- $id := .Params.app -}}
+{{- $app := index (where hugo.Data.apps "id" $id) 0 -}}
+{{- if not $app -}}{{ errorf "app page %q: unknown app id %q" .Path $id }}{{ end -}}
+{{- $status := $app.status | default "stable" -}}
+{{- $heroShot := .Params.hero_shot -}}
+
+<section class="t-app-hero t-app-hue" style="--hue: {{ $app.hue }}">
+  <div class="t-wrap">
+    <span class="t-eyebrow">{{ if eq $status "preview" }}Preview · {{ end }}{{ if eq $app.kind "app" }}tie app{{ else }}{{ $app.kind }}{{ end }}</span>
+    <div class="t-showcase-head">
+      <img class="icon" src="{{ printf "brand/%s.svg" $id | relURL }}" alt="" width="68" height="68" />
+      <div>
+        <h1>{{ $app.name }}</h1>
+        <p class="tagline">{{ $app.tagline }}</p>
+      </div>
+    </div>
+    <p class="t-showcase-summary">{{ $app.summary }}</p>
+    <div class="meta">
+      {{ if eq $status "preview" }}<span class="t-badge t-badge--warn">Preview</span>{{ else }}<span class="t-badge t-badge--muted">Stable</span>{{ end }}
+      {{ range $app.platforms }}<span class="t-chip">{{ . }}</span>{{ end }}
+      <a class="t-chip" href="{{ $app.repo }}">GitHub ↗</a>
+    </div>
+    <div class="t-row" style="margin-top: 1.5rem">
+      <a class="t-btn t-btn-primary" href="{{ "/install/" | relURL }}">Install{{ partial "icon.html" (dict "name" "arrow-right" "size" 15) }}</a>
+      <a class="t-btn t-btn-ghost" href="{{ $app.docs | relURL }}">Manual</a>
+    </div>
+  </div>
+</section>
+
+{{ with $heroShot }}
+  <div class="t-wrap t-showcase-shot">
+    {{ partial "shot.html" (dict
+      "app" $id
+      "scene" .scene
+      "themes" (.themes | default "dark")
+      "title" $app.name
+      "meta" (.meta | default "")
+      "alt" (.alt | default "")
+      "caption" (.caption | default "")
+      "eager" true
+      "sizes" "(max-width: 900px) 100vw, 1200px"
+    ) }}
+  </div>
+{{ end }}
+
+<section class="t-section t-section--tight">
+  <div class="t-wrap">
+    <span class="t-eyebrow">Highlights</span>
+    <h2 class="t-h2">The parts that matter.</h2>
+    <div class="t-grid t-grid--3 t-highlights" style="--hue: {{ $app.hue }}">
+      {{ range $app.highlights }}
+        <div class="t-highlight">
+          <span class="hi">{{ partial "icon.html" (dict "name" "check" "size" 14) }}</span>
+          <div class="ht">{{ .title | markdownify }}</div>
+          <div class="hd">{{ .text | markdownify }}</div>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<div class="t-wrap">
+  <article class="content t-showcase-content">
+    {{ .Content }}
+  </article>
+</div>
+
+<section class="t-section t-section--soft">
+  <div class="t-wrap">
+    <div class="t-status">
+      <div>
+        <h3>Where it is</h3>
+        <ul>
+          <li>Status: {{ if eq $status "preview" }}preview, the format may still change{{ else }}stable enough to use every day{{ end }}</li>
+          <li>Versioning: tie-gui is released from the repo; the apps are built from source.</li>
+          {{ range $app.notes }}<li>{{ . }}</li>{{ end }}
+        </ul>
+      </div>
+      <div>
+        <h3>Works with</h3>
+        <ul>
+          {{ range hugo.Data.apps }}{{ if ne .id $id }}
+          <li><a href="{{ .page | relURL }}">{{ .name }}</a> — {{ .tagline }}</li>
+          {{ end }}{{ end }}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ partial "showcase-end.html" . }}
+{{ end }}

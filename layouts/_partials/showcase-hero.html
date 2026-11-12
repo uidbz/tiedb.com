@@ -1,0 +1,51 @@
+{{- /* Shared hero for showcase pages. Reads page params. */ -}}
+{{- $mark := .Params.mark | default "tie" -}}
+{{- $hue := .Params.hue | default "#2dd4bf" -}}
+{{- $eyebrow := .Params.eyebrow -}}
+{{- $tagline := .Params.tagline | default .Description -}}
+{{- $summary := .Params.summary -}}
+{{- $badges := .Params.badges -}}
+{{- $primary := .Params.primary -}}
+{{- $secondary := .Params.secondary -}}
+{{- $heroShot := .Params.hero_shot -}}
+
+<section class="t-app-hero t-app-hue" style="--hue: {{ $hue }}">
+  <div class="t-wrap">
+    {{ with $eyebrow }}<span class="t-eyebrow">{{ . }}</span>{{ end }}
+    <div class="t-showcase-head">
+      <img class="icon" src="{{ printf "brand/%s.svg" $mark | relURL }}" alt="" width="68" height="68" />
+      <div>
+        <h1>{{ .Title }}</h1>
+        {{ with $tagline }}<p class="tagline">{{ . }}</p>{{ end }}
+      </div>
+    </div>
+    {{ with $summary }}<p class="t-showcase-summary">{{ . }}</p>{{ end }}
+    {{ with $badges }}
+      <div class="meta">
+        {{ range . }}<span class="t-chip">{{ . }}</span>{{ end }}
+      </div>
+    {{ end }}
+    {{ if or $primary $secondary }}
+      <div class="t-row" style="margin-top: 1.5rem">
+        {{ with $primary }}<a class="t-btn t-btn-primary" href="{{ .url | relURL }}">{{ .label }}{{ partial "icon.html" (dict "name" "arrow-right" "size" 15) }}</a>{{ end }}
+        {{ with $secondary }}<a class="t-btn t-btn-ghost" href="{{ .url | relURL }}">{{ .label }}</a>{{ end }}
+      </div>
+    {{ end }}
+  </div>
+</section>
+
+{{ with $heroShot }}
+  <div class="t-wrap t-showcase-shot">
+    {{ partial "shot.html" (dict
+      "app" .app
+      "scene" .scene
+      "themes" (.themes | default "dark")
+      "title" (.title | default $.Title)
+      "meta" (.meta | default "")
+      "alt" (.alt | default "")
+      "caption" (.caption | default "")
+      "eager" true
+      "sizes" "(max-width: 900px) 100vw, 1200px"
+    ) }}
+  </div>
+{{ end }}

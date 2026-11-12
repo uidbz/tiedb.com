@@ -1,0 +1,8 @@
+{{- $project := .Get "project" | default .Get 0 -}}
+{{- $key := .Get "key" | default .Get 1 -}}
+{{- $p := index hugo.Data.facts $project -}}
+{{- with $p -}}
+  {{- index . $key -}}
+{{- else -}}
+  {{- errorf "fact: unknown project %q" $project -}}
+{{- end -}}

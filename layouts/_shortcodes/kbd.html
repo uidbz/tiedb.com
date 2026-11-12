@@ -1,0 +1,6 @@
+{{- $keys := .Get "keys" | default (.Get 0) -}}
+<span class="t-keys">
+  {{- range split $keys "+" -}}
+    <kbd>{{ . }}</kbd>
+  {{- end -}}
+</span>

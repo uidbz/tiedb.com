@@ -1,0 +1,5 @@
+public/
+resources/
+.cache/
+site.tar.gz
+.hugo_build.lock

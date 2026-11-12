@@ -1,0 +1,32 @@
+{{- /* Generated social card: the app's mark tile plus the page title. */ -}}
+{{- $id := "tie" -}}
+{{- with .Params.mark }}{{ $id = . }}{{ end -}}
+{{- with .Params.app }}{{ $id = . }}{{ end -}}
+{{- $base := resources.Get (printf "og/%s.png" $id) -}}
+{{- if not $base }}{{ $base = resources.Get "og/tie.png" }}{{ end -}}
+{{- $title := .Title -}}
+{{- if .IsHome }}{{ $title = "Tie it all together" }}{{ end -}}
+{{- $size := 54 -}}
+{{- if le (len $title) 14 }}{{ $size = 76 }}{{ else if gt (len $title) 32 }}{{ $size = 40 }}{{ end -}}
+{{- $sub := .Params.tagline | default .Description | default site.Params.description | plainify | truncate 72 -}}
+{{- $card := $base -}}
+{{- with resources.Get "fonts/NotoSans-Bold.ttf" -}}
+  {{- $card = $card.Filter (images.Text $title (dict "font" . "size" $size "color" "#f2f3f5" "x" 440 "y" 235 "maxWidth" 680 "linespacing" 10)) -}}
+{{- end -}}
+{{- with resources.Get "fonts/NotoSans-Regular.ttf" -}}
+  {{- $card = $card.Filter (images.Text $sub (dict "font" . "size" 21 "color" "#9a9ca3" "x" 440 "y" 515 "maxWidth" 680)) -}}
+  {{- $card = $card.Filter (images.Text "tiedb.com" (dict "font" . "size" 18 "color" "#6f727a" "x" 84 "y" 570)) -}}
+{{- end -}}
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ partial "utils/page-description" . }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:image" content="{{ $card.Permalink }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ $title }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ $card.Permalink }}">
+<meta name="twitter:title" content="{{ $title }}">
+{{- with .Params.description }}<meta name="twitter:description" content="{{ . }}">{{ end }}

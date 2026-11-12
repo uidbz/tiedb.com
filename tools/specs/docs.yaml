@@ -1,0 +1,53 @@
+# Source documents synced into the site's reference section.
+#
+# These are long-form notes that are useful verbatim. Curated pages (concepts,
+# guides, app manuals) are written in content/ and are not touched by the sync.
+# Edit the source file, then run `make docs`.
+- repo: tie
+  ref: master
+  src: docs/runner-api.md
+  dst: docs/reference/tie/runner-api.md
+  title: "Runner API"
+  weight: 51
+- repo: tie
+  ref: master
+  src: python/README.md
+  dst: docs/reference/tie/python-client.md
+  title: "Python client"
+  weight: 52
+- repo: tie
+  ref: master
+  src: docs/client.md
+  dst: docs/reference/tie/go-client.md
+  title: "Go client"
+  weight: 53
+- repo: tie
+  ref: master
+  src: docs/search.md
+  dst: docs/reference/tie/search-source.md
+  title: "Search: the full note"
+  weight: 54
+- repo: tie
+  ref: master
+  src: docs/internals.md
+  dst: docs/reference/tie/internals-source.md
+  title: "Internals: the full note"
+  weight: 55
+- repo: tie-gui
+  ref: master
+  src: docs/ANDROID.md
+  dst: docs/reference/apps/android.md
+  title: "Android builds"
+  weight: 51
+- repo: tie-gui
+  ref: master
+  src: docs/OPTIMIZATIONS.md
+  dst: docs/reference/apps/optimizations.md
+  title: "Optimizations"
+  weight: 52
+- repo: tie-gui
+  ref: master
+  src: docs/TIE-FM-MUSICBRAINZ.md
+  dst: docs/reference/apps/musicbrainz.md
+  title: "MusicBrainz"
+  weight: 53

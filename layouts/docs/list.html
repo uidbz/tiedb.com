@@ -1,0 +1,79 @@
+{{ define "main" }}
+{{ if eq .RelPermalink "/docs/" }}
+  <div class="t-docs-hero">
+    <div class="t-wrap">
+      <span class="t-eyebrow">Documentation</span>
+      <h1 style="margin: .9rem 0 .7rem; font-size: clamp(2.4rem, 5vw, 3.6rem); letter-spacing: -.04em; line-height: 1.05">The manual, in one place.</h1>
+      <p class="t-sub" style="max-width: 46rem">
+        Start with a local test environment, then go as deep as you want: the data
+        model, the mounts, the CLI, the apps and the agent. Every page links back to
+        the source file it came from.
+      </p>
+      <div class="t-row" style="margin-top: 1.4rem">
+        <a class="t-btn t-btn-primary" href="{{ "/docs/tie/getting-started/" | relURL }}">Start with tie{{ partial "icon.html" (dict "name" "arrow-right" "size" 15) }}</a>
+        <a class="t-btn t-btn-ghost" href="{{ "/docs/tie/cli/" | relURL }}">CLI reference</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="t-wrap" style="padding-top: 3rem; padding-bottom: 4rem">
+    <div class="t-grid t-grid--3">
+      {{ range slice (site.GetPage "/docs/tie") (site.GetPage "/docs/apps") (site.GetPage "/docs/anneal") }}
+        <div class="t-doc-group">
+          <div class="dh">
+            {{ with .Params.mark }}<img src="{{ printf "brand/%s.svg" . | relURL }}" alt="" width="30" height="30" />{{ end }}
+            <div class="dt">{{ .Title }}</div>
+          </div>
+          <ul>
+            {{ range first 7 .RegularPagesRecursive }}
+              <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+            {{ end }}
+          </ul>
+          <p style="margin: 1rem 0 0"><a class="t-more" href="{{ .RelPermalink }}">Open the section →</a></p>
+        </div>
+      {{ end }}
+    </div>
+
+    <div class="t-grid t-grid--2 t-gap-lg" style="margin-top: 1rem">
+      <a class="t-card t-card--link" href="{{ "/docs/tie/cli/" | relURL }}">
+        <div class="t-icon-tile">{{ partial "icon.html" (dict "name" "terminal" "size" 18) }}</div>
+        <div class="t-h3">Command reference</div>
+        <p class="t-app-line">Every command, every flag. Generated from the binary that ships.</p>
+      </a>
+      <a class="t-card t-card--link" href="{{ "/docs/glossary/" | relURL }}">
+        <div class="t-icon-tile">{{ partial "icon.html" (dict "name" "book" "size" 18) }}</div>
+        <div class="t-h3">Glossary</div>
+        <p class="t-app-line">Triple, tiedir, dir-type, harness, overlay — the vocabulary, in one page.</p>
+      </a>
+    </div>
+    <div class="content t-docs-hub-body">{{ .Content }}</div>
+  </div>
+{{ else }}
+  <section class="t-docs-hero">
+    <div class="t-wrap">
+      <span class="t-eyebrow">Documentation</span>
+      <h1 style="margin: .9rem 0 .5rem">{{ .Title }}</h1>
+      {{ with .Description }}<p class="t-sub">{{ . }}</p>{{ end }}
+    </div>
+  </section>
+  <div class="t-wrap" style="padding-top: 2.5rem; padding-bottom: 4rem">
+    {{ with .Content }}<div class="content t-showcase-content" style="margin-bottom: 2rem">{{ . }}</div>{{ end }}
+    <div class="t-grid t-grid--2 t-gap-lg">
+      {{ range .Pages }}
+        <a class="t-card t-card--link" href="{{ .RelPermalink }}">
+          <div class="t-app-head">
+            <div class="t-icon-tile">{{ partial "icon.html" (dict "name" (cond .IsSection "folder" "book") "size" 16) }}</div>
+            <div class="t-app-name">{{ .Title }}</div>
+          </div>
+          <p class="t-app-line">
+            {{ if .Description }}{{ .Description | plainify | truncate 130 }}
+            {{ else if .IsSection }}A section{{ if .Pages }} · {{ len .Pages }} pages{{ end }}
+            {{ else }}{{ .Summary | plainify | truncate 130 }}{{ end }}
+          </p>
+          <div class="t-app-foot"><span class="t-more">{{ if .IsSection }}Open the section →{{ else }}Read →{{ end }}</span></div>
+        </a>
+      {{ end }}
+    </div>
+  </div>
+{{ end }}
+{{ end }}

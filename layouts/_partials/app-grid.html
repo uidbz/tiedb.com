@@ -1,0 +1,8 @@
+{{- $exclude := .exclude | default "" -}}
+<div class="t-grid t-grid--3">
+  {{- range hugo.Data.apps -}}
+    {{- if ne .id $exclude -}}
+      {{ partial "app-card.html" (dict "app" .) }}
+    {{- end -}}
+  {{- end -}}
+</div>

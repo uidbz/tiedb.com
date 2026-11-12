@@ -1,0 +1,14 @@
+{{ define "main" }}
+<section class="t-app-hero t-app-hue" style="--hue: var(--t-accent)">
+  <div class="t-wrap">
+    <span class="t-eyebrow">{{ .Params.eyebrow | default .Section | default "tie" }}</span>
+    <h1 style="margin:.9rem 0 .5rem">{{ .Title }}</h1>
+    {{ with .Description }}<p class="tagline">{{ . }}</p>{{ end }}
+  </div>
+</section>
+<div class="t-wrap">
+  <article class="content t-showcase-content" style="padding-bottom: 4rem">
+    {{ .Content }}
+  </article>
+</div>
+{{ end }}

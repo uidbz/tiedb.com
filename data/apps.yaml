@@ -1,0 +1,219 @@
+# The app registry. Curated copy, one place. Generated facts are merged in by
+# the templates from data/facts.yaml.
+
+- id: tie
+  name: tie
+  kind: store
+  tagline: "Tag it. Find it. Mount it."
+  summary: >-
+    A content-addressed library where tags are a filesystem. One hash joins the
+    bytes on disk to everything the library knows about them.
+  hue: "#2dd4bf"
+  hue_light: "#0f766e"
+  status: stable
+  version: "v0.9.0"
+  platforms: ["Linux (FUSE)", "SMB for macOS & Windows"]
+  repo: https://github.com/uidbz/tie
+  page: /tie/
+  docs: /docs/tie/
+  highlights:
+    - title: "Content is the key"
+      text: "Every file is stored under its HighwayHash. Import the same photo twice and it exists once."
+    - title: "A path is a query"
+      text: "Mount the live tree and browse `query/jazz mellow -live` like a folder. Tags are the index."
+    - title: "The store is a file"
+      text: "One `.tie` file, no daemon required. `tie -f` mounts and serves it in-process."
+    - title: "Built to be checked"
+      text: "Verify/repair with a journaled plan, hashes checked on receipt, history restored per file."
+    - title: "Free-text search"
+      text: "Words, substring, prefix or fuzzy. Accent- and case-folded, with no sidecar index."
+    - title: "Share it over SMB"
+      text: "The same tree in Explorer and Finder, from a pure-Go SMB2/3 server."
+  notes:
+    - "Designed for one PC or a small trusted LAN, not a public service."
+    - "Passwords live in the config file; the servers speak HTTP by default."
+    - "SMB is v2/3 without encryption."
+
+- id: tie-fm
+  name: tie-fm
+  kind: app
+  tagline: "Two panes. Both worlds."
+  summary: >-
+    A twin-panel file manager for your local disks and your tie library, with
+    album import, MusicBrainz matches and tags that behave like files.
+  hue: "#38bdf8"
+  hue_light: "#0369a1"
+  status: stable
+  platforms: ["Linux", "Windows", "macOS"]
+  repo: https://github.com/uidbz/tie-gui
+  page: /apps/tie-fm/
+  docs: /docs/apps/
+  highlights:
+    - title: "Local and tie, side by side"
+      text: "Two panes with tabs, history, bookmarks and a breadcrumb you can type in."
+    - title: "Copy into the library"
+      text: "Choose a dir-type and drop a folder in. Re-imports become versions, not duplicates."
+    - title: "Import as albums"
+      text: "Bulk music import with destination templates, disc placement and MusicBrainz matches."
+    - title: "Tags that filter and edit"
+      text: "Select nothing and tags filter the pane; select rows and the same panel edits them."
+    - title: "Move big things safely"
+      text: "Pause, resume or stop a copy. Conflicts offer skip, rename, overwrite, apply-to-all."
+    - title: "See before you open"
+      text: "A preview grid with an image viewer, video player and archive extraction."
+  notes:
+    - "Device browsing (USB, MTP phones) is Linux-only."
+    - "The MusicBrainz mirror is optional; the web service works without it."
+
+- id: tie-audio
+  name: tie-audio
+  kind: app
+  tagline: "Your library, on shelves."
+  summary: >-
+    A tag-driven music player for tie. Home shelves, a cover wall, playlists and
+    a play history that remembers what you actually listened to.
+  hue: "#fb7185"
+  hue_light: "#be123c"
+  status: stable
+  platforms: ["Linux", "Android"]
+  repo: https://github.com/uidbz/tie-gui
+  page: /apps/tie-audio/
+  docs: /docs/apps/
+  highlights:
+    - title: "Shelves, not spreadsheets"
+      text: "Jump back in, recently added, on this day, haven't heard in a while."
+    - title: "Covers or columns"
+      text: "A cover wall and a sortable table share the same filters and search."
+    - title: "Gapless local playback"
+      text: "FLAC, MP3, WAV, OGG and Opus through PipeWire, or a remote pwplay server."
+    - title: "The queue you wanted"
+      text: "Shuffle, reorder, save as playlist. The next track is already loaded."
+    - title: "History as data"
+      text: "Plays are recorded in tie, so recommendations and 'on this day' are queries."
+    - title: "Media keys and phones"
+      text: "MPRIS on Linux, a media session and lock-screen controls on Android."
+  notes:
+    - "Android builds need the libmpv cross-compile toolchain."
+    - "Playback history is opt-out, never uploaded anywhere."
+
+- id: tie-view
+  name: tie-view
+  kind: app
+  tagline: "Tag at the speed of sight."
+  summary: >-
+    A tag-driven image viewer with quick-tag pills, star ratings, favourites and
+    a filesystem view of the same library.
+  hue: "#a78bfa"
+  hue_light: "#6d28d9"
+  status: stable
+  platforms: ["Linux", "Windows", "macOS", "Android"]
+  repo: https://github.com/uidbz/tie-gui
+  page: /apps/tie-view/
+  docs: /docs/apps/
+  highlights:
+    - title: "Tags, include and exclude"
+      text: "Refine with related tags, star the ones you use, and hide the rest."
+    - title: "Quick-tag pills"
+      text: "One tap or one key per tag, laid over the image edge. Sizes from xs to xl."
+    - title: "Ratings and favourites"
+      text: "1–5 stars, favourite tags and filters that survive a restart."
+    - title: "The tree is right there"
+      text: "A Files tab shows the virtual library tree when you want paths, not tags."
+    - title: "Thumbnails that stay fast"
+      text: "Server-cached thumbnails and archive covers, generated once."
+    - title: "Hand-off from tie-fm"
+      text: "`tie:` URLs open exactly the image you clicked, in the collection you meant."
+  notes:
+    - "Video playback needs libmpv; it is disabled by default in headless builds."
+
+- id: imgview
+  name: imgview
+  kind: app
+  tagline: "Point it at a folder."
+  summary: >-
+    A fast local image viewer that needs no library at all: folders, archives
+    and video, with a justified grid and an EXIF overlay.
+  hue: "#a3e635"
+  hue_light: "#4d7c0f"
+  status: stable
+  platforms: ["Linux", "Windows", "macOS", "Android"]
+  repo: https://github.com/uidbz/tie-gui
+  page: /apps/imgview/
+  docs: /docs/apps/
+  highlights:
+    - title: "A folder is enough"
+      text: "No import, no database. Pass a directory, a file or an archive."
+    - title: "Justified rows"
+      text: "A gallery that fills the width, paginated at 500 images and cached on disk."
+    - title: "Archives open like folders"
+      text: "zip, rar, tar, 7z, cbr and cbz, with a content preview on the tile."
+    - title: "Video in place"
+      text: "libmpv playback, frame thumbnails and a frame strip on the tile."
+    - title: "The metadata you want"
+      text: "EXIF and file info on `I`, without leaving the image."
+    - title: "Keys that are yours"
+      text: "Every shortcut is rebindable, and one key can run your own command."
+  notes:
+    - "Android uses the system folder picker; no tie connection is required."
+
+- id: tie-browser
+  name: tie-browser
+  kind: app
+  tagline: "Pages made of your library."
+  summary: >-
+    A scene browser and visual designer: point-and-click pages stored in tie,
+    built from images, galleries, tags, audio and video.
+  hue: "#e879f9"
+  hue_light: "#a21caf"
+  status: preview
+  platforms: ["Linux", "Windows", "macOS"]
+  repo: https://github.com/uidbz/tie-gui
+  page: /apps/tie-browser/
+  docs: /docs/apps/
+  highlights:
+    - title: "Scenes are folders"
+      text: "`tie:/scenes/house/living-room/` holds `scene.json`, a thumbnail and an optional script."
+    - title: "Hotspots and layouts"
+      text: "Rectangles, circles and containers that navigate, open or play."
+    - title: "Components from tie"
+      text: "Image, gallery, tags, related, document, audio and video, bound to live queries."
+    - title: "Design in place"
+      text: "Ctrl+E opens the designer; saves are versioned and show their state."
+    - title: "Script when you need it"
+      text: "A Risor sidecar can add behaviour without leaving the page."
+    - title: "The library answers"
+      text: "Member and link indexes make 'which scenes use this photo?' a tie query."
+  notes:
+    - "Preview: the scene format can still change between releases."
+    - "Video surfaces and richer pickers are on the roadmap."
+
+- id: anneal
+  name: anneal
+  kind: agent
+  tagline: "The coding agent that anneals."
+  summary: >-
+    A local-first coding agent that works in your project, learns from finished
+    sessions, and proposes better harnesses — with evidence and your approval.
+  hue: "#e6a23c"
+  hue_light: "#b45309"
+  status: preview
+  platforms: ["Linux desktop", "Headless", "Container"]
+  repo: https://github.com/uidbz/anneal
+  page: /anneal/
+  docs: /docs/anneal/
+  highlights:
+    - title: "Tools, not just chat"
+      text: "Read, write, edit, bash, glob, grep, fetch and todos, with approvals you control."
+    - title: "Plan, then build"
+      text: "A read-only plan mode, a build mode, and a turn budget that hands off cleanly."
+    - title: "It remembers"
+      text: "Project memory, agent-authored skills and cross-session recall through tie."
+    - title: "It reviews itself"
+      text: "An idle-time reviewer mines finished sessions for lessons and new skills."
+    - title: "It improves its harness"
+      text: "Propose, probe, compose. Changes need evidence and an explicit promote."
+    - title: "Runs where you do"
+      text: "A native Fyne desktop app, a headless CLI, or a containerised backend."
+  notes:
+    - "Linux desktop is the supported GUI target; the headless CLI and server are portable."
+    - "Version `dev`: there are no tagged releases yet."

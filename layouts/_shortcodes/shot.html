@@ -1,0 +1,18 @@
+{{- $class := .Get "class" | default "" -}}
+{{- with .Get "app" -}}
+  {{- $args := dict
+    "app" .
+    "scene" ($.Get "scene" | default "home")
+    "themes" ($.Get "themes" | default "dark")
+    "title" ($.Get "title" | default .)
+    "meta" (. | printf "%s")
+    "alt" ($.Get "alt" | default "")
+    "caption" ($.Get "caption" | default "")
+    "eager" (eq ($.Get "eager" | default "false") "true")
+    "sizes" ($.Get "sizes" | default "(max-width: 900px) 100vw, 1100px")
+    "class" $class
+  -}}
+  {{- partial "shot.html" $args -}}
+{{- else -}}
+  {{- errorf "shot shortcode: app is required" -}}
+{{- end -}}

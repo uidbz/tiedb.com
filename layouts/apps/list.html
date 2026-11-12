@@ -1,0 +1,12 @@
+{{ define "main" }}
+  {{ partial "showcase-hero.html" . }}
+  <div class="t-wrap">
+    <article class="content t-showcase-content">
+      {{ .Content }}
+    </article>
+    <div class="t-gap-lg">
+      {{ partial "app-grid.html" (dict) }}
+    </div>
+  </div>
+  {{ partial "showcase-end.html" . }}
+{{ end }}

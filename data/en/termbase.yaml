@@ -1,0 +1,31 @@
+# Glossary terms for the `term` shortcode. Hextra reads data/en/termbase.yaml.
+- term: triple
+  definition: "A (key, value1, value2) row read as subject, relation, object. The only record type in the database."
+- term: content hash
+  definition: "The 64-character HighwayHash of a file's bytes. It identifies the content, not the path, so tags and history follow the bytes."
+- term: filehost
+  definition: "The content-addressed blob store. It stores each file under its hash in a sharded directory and verifies downloads."
+- term: tiedir
+  definition: "An immutable directory manifest: a list of (hash, filename, size, head) entries, stored as a blob like a git tree."
+- term: dir-type
+  definition: "The type of a directory: audio-dir, image-dir, video-dir, document-dir, an archive variant, or a custom type from [ImportDest]."
+- term: collection
+  definition: "Either a storage collection (one .tie file, selected with -c) or a media collection (an album, series or picture set that follows the member-of contract)."
+- term: tag
+  definition: "A triple from a content hash to a tag, plus a registry entry. Tags are multi-valued and survive renames because they attach to the hash."
+- term: mount
+  definition: "A FUSE view of a tiedir (read-only) or of the live tree (query/, files/, tags/). A path under query/ is a tag expression."
+- term: verify
+  definition: "tie's fsck: cross-check indexes, scan the tree for orphans, cycles and duplicates, and optionally check blobs. Findings are TSV."
+- term: harness
+  definition: "The prompts, tools, guardrails, skills and review rules around a model. anneal can propose changes to its own harness."
+- term: overlay
+  definition: "A successor harness that sits beside the active one until it is promoted. Overlays are how anneal tests an improvement without betting the session on it."
+- term: promote
+  definition: "The explicit act of making a tested successor harness the one anneal runs. No automatic self-modification."
+- term: probe
+  definition: "Running a finished session's hard parts against a candidate harness and a baseline, then comparing steps, failures and tokens."
+- term: session
+  definition: "One anneal conversation, stored as JSONL under ~/.anneal/sessions, with its tool trail, approvals and turn budget."
+- term: Risor
+  definition: "A scripting language for Go programs. fynerisor binds it to Fyne; anneal hosts its Harness view and a sandboxed script tool with it."

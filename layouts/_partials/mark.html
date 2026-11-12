@@ -1,0 +1,15 @@
+{{- /* A mark from the tie family. Params: id, size (sm|md|lg|xl), alt, class */ -}}
+{{- $id := .id -}}
+{{- $size := .size | default "md" -}}
+{{- $alt := .alt | default "" -}}
+{{- $class := .class | default "" -}}
+<img
+  class="t-mark t-mark--{{ $size }} {{ $class }}"
+  src="{{ printf "brand/%s.svg" $id | relURL }}"
+  alt="{{ $alt }}"
+  {{ if not $alt }}aria-hidden="true"{{ end }}
+  loading="lazy"
+  decoding="async"
+  width="128"
+  height="128"
+/>

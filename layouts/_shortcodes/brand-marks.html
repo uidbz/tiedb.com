@@ -1,0 +1,15 @@
+<div class="t-grid t-grid--2 t-gap-lg">
+  {{ range hugo.Data.apps }}
+  <div class="t-card" style="display:flex; align-items:center; gap:1rem">
+    <img src="/brand/{{ .id }}.svg" alt="" width="64" height="64" />
+    <div style="flex:1">
+      <div class="t-h3" style="margin-bottom:.15rem">{{ .name }}</div>
+      <div class="t-app-line">{{ .tagline }}</div>
+    </div>
+    <div style="display:grid; gap:.25rem; text-align:right">
+      <a class="t-more" href="/brand/{{ .id }}.svg">SVG ↓</a>
+      <a class="t-more" href="/brand/{{ .id }}-512.png">512 PNG ↓</a>
+    </div>
+  </div>
+  {{ end }}
+</div>

@@ -1,0 +1,15 @@
+{{- $id := .Get "app" | default .Get 0 -}}
+{{- $app := index (where hugo.Data.apps "id" $id) 0 -}}
+{{- with $app -}}
+<div class="t-grid t-grid--3 t-highlights" style="--hue: {{ .hue }}">
+  {{- range .highlights }}
+  <div class="t-highlight">
+    <span class="hi">{{ partial "icon.html" (dict "name" "check" "size" 14) }}</span>
+    <div class="ht">{{ .title | markdownify }}</div>
+    <div class="hd">{{ .text | markdownify }}</div>
+  </div>
+  {{- end }}
+</div>
+{{- else -}}
+  {{- errorf "highlights: unknown app %q" $id -}}
+{{- end -}}

@@ -1,0 +1,11 @@
+<div class="t-grid t-grid--3" style="margin-top: 1.5rem">
+  {{ range hugo.Data.apps }}
+  <div class="t-card" style="display:flex; align-items:center; gap:.75rem">
+    <span style="width:2rem; height:2rem; border-radius:8px; background:{{ .hue }}; flex:none"></span>
+    <div>
+      <div style="font-weight:650; font-size:.85rem">{{ .name }}</div>
+      <code style="font-family:var(--t-mono); font-size:.72rem; color:var(--t-muted)">{{ .hue }}</code>
+    </div>
+  </div>
+  {{ end }}
+</div>

@@ -1,0 +1,28 @@
+{{ define "main" }}
+<section class="t-section" style="padding-top: 5rem">
+  <div class="t-wrap" style="max-width: 46rem">
+    <span class="t-eyebrow">404 · no such path</span>
+    <h1 style="margin: 1rem 0 .8rem; font-size: clamp(2.6rem, 6vw, 4.4rem); letter-spacing: -.05em; line-height: 1">Nothing is tagged with this URL.</h1>
+    <p class="t-sub">
+      The page is missing, or the tag query returned an empty set. Try the library,
+      the apps, or the docs.
+    </p>
+    <div class="t-term" style="margin-top: 2rem">
+      <div class="t-term-bar">
+        <img src="/brand/tie.svg" alt="" />
+        <span>you@studio</span>
+      </div>
+      <pre class="t-term-body"><code><span class="t-p">$</span> <span class="t-cmd">ls "~/mnt/query/this-page"</span>
+<span class="t-o">ls: cannot access: no such tag</span>
+
+<span class="t-p">$</span> <span class="t-cmd">tie tag list</span>
+<span class="t-g">apps</span>  <span class="t-g">docs</span>  <span class="t-g">install</span>  <span class="t-g">tie</span>  <span class="t-g">anneal</span></code></pre>
+    </div>
+    <div class="t-row" style="margin-top: 1.6rem">
+      <a class="t-btn t-btn-primary" href="/">Go home</a>
+      <a class="t-btn t-btn-ghost" href="/docs/">Browse the docs</a>
+      <a class="t-btn t-btn-ghost" href="/apps/">See the apps</a>
+    </div>
+  </div>
+</section>
+{{ end }}

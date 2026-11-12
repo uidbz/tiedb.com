@@ -1,0 +1,419 @@
+{{ define "main" }}
+{{- $tie := index hugo.Data.facts "tie" -}}
+{{- $apps := hugo.Data.apps -}}
+{{- $fm := index (where $apps "id" "tie-fm") 0 -}}
+{{- $audio := index (where $apps "id" "tie-audio") 0 -}}
+{{- $view := index (where $apps "id" "tie-view") 0 -}}
+{{- $img := index (where $apps "id" "imgview") 0 -}}
+{{- $browser := index (where $apps "id" "tie-browser") 0 -}}
+{{- $anneal := index (where $apps "id" "anneal") 0 -}}
+
+<div class="t-home">
+
+  <!-- ============================== hero ============================== -->
+  <section class="t-hero">
+    <div class="t-wrap">
+      <div class="t-hero-grid">
+        <div>
+          <span class="t-eyebrow">tie {{ $tie.version }} · local-first · BSD-3</span>
+          <h1>Tie it<span class="t-grad">all together.</span></h1>
+          <p class="t-lead">
+            A local-first library for your <strong>files, music and photos</strong> — tagged,
+            deduplicated and mountable as plain folders. Native apps to enjoy it, and
+            <strong>anneal</strong>, a coding agent that improves its own harness.
+          </p>
+          <div class="t-row">
+            <a class="t-btn t-btn-primary" href="{{ "/apps/" | relURL }}">
+              Meet the apps
+              {{ partial "icon.html" (dict "name" "arrow-right" "size" 16) }}
+            </a>
+            <a class="t-btn t-btn-ghost" href="{{ "/docs/tie/getting-started/" | relURL }}">
+              Try tie in 60 seconds
+            </a>
+          </div>
+          <div class="t-hero-meta">
+            <span><i class="t-dot"></i> {{ $tie.version }} released {{ (time.AsTime $tie.released).Format "Jan 2" }}</span>
+            <span>No accounts. No cloud. No trackers.</span>
+            <span><a href="{{ $tie.repo }}">Source ↗</a></span>
+          </div>
+        </div>
+
+        <div class="t-stack" aria-label="The tie stack: apps, the library, and your disk">
+          <div class="t-stack-head">
+            <span class="t-stack-title">
+              <img src="{{ "brand/tie.svg" | relURL }}" alt="" width="22" height="22" />
+              one library, every app
+            </span>
+            <span class="t-badge t-badge--accent">local</span>
+          </div>
+
+          <div class="t-stack-label">Apps</div>
+          <div class="t-stack-apps">
+            <a class="t-stack-app" href="{{ $fm.page | relURL }}"><img src="{{ "brand/tie-fm.svg" | relURL }}" alt="" />{{ $fm.name }}</a>
+            <a class="t-stack-app" href="{{ $audio.page | relURL }}"><img src="{{ "brand/tie-audio.svg" | relURL }}" alt="" />{{ $audio.name }}</a>
+            <a class="t-stack-app" href="{{ $view.page | relURL }}"><img src="{{ "brand/tie-view.svg" | relURL }}" alt="" />{{ $view.name }}</a>
+            <a class="t-stack-app" href="{{ $img.page | relURL }}"><img src="{{ "brand/imgview.svg" | relURL }}" alt="" />{{ $img.name }}</a>
+            <a class="t-stack-app" href="{{ $browser.page | relURL }}"><img src="{{ "brand/tie-browser.svg" | relURL }}" alt="" />{{ $browser.name }}</a>
+            <a class="t-stack-app" href="{{ $anneal.page | relURL }}"><img src="{{ "brand/anneal.svg" | relURL }}" alt="" />{{ $anneal.name }}</a>
+          </div>
+
+          <div class="t-stack-hash"><span>9a1f3c…c03e</span></div>
+
+          <div class="t-stack-core">
+            <img src="{{ "brand/tie.svg" | relURL }}" alt="" />
+            <div>
+              <div class="name">tie</div>
+              <div class="desc">content-addressed blobs + triples, joined by the content hash</div>
+            </div>
+          </div>
+
+          <div class="t-stack-hash"><span>the same hash, both ways</span></div>
+
+          <div class="t-stack-disc">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3v-1.5a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3v1.5a3 3 0 0 1-3 3m-13.5 0a3 3 0 0 0-3 3v1.5a3 3 0 0 0 3 3h13.5a3 3 0 0 0 3-3v-1.5a3 3 0 0 0-3-3"/></svg>
+            <span><strong>your disk</strong> · plain files you can back up with rsync, or one <code>.tie</code> file</span>
+          </div>
+
+          <div class="t-stack-term">
+            <div><span class="p">$</span> <span class="c">ls "~/mnt/query/jazz mellow -live"</span></div>
+            <div class="o">baker-street/&nbsp;&nbsp;kind-of-blue/&nbsp;&nbsp;slow-cooling/</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== model ============================== -->
+  <section class="t-section t-section--soft" id="model">
+    <div class="t-wrap">
+      <div style="max-width: 54rem">
+        <span class="t-eyebrow">The model</span>
+        <h2 class="t-h2">One hash. Two stores. Every app.</h2>
+        <p class="t-sub">
+          tie splits what a file <em>is</em> from what it <em>means</em>. The bytes live in a
+          content-addressed blob store; the meaning lives in triples. The content hash is the
+          join, so tags, ratings and history follow the content — not the filename.
+        </p>
+      </div>
+
+      <div class="t-flow">
+        <div class="t-flow-file">
+          <div class="fname">
+            {{ partial "icon.html" (dict "name" "image" "size" 18) }}
+            holiday-2014.jpg
+          </div>
+          <div class="o" style="color: var(--t-soft); font-size: .74rem; margin-top: .35rem">4.2 MB · shot in Reykjavík</div>
+          <div class="hash">9a1f3c0b7e…4d2ac03e</div>
+        </div>
+
+        <div class="t-flow-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16m0 0-5-5m5 5-5 5"/></svg>
+        </div>
+
+        <div>
+          <div class="t-flow-stores">
+            <div class="t-store">
+              <span class="st-icon">{{ partial "icon.html" (dict "name" "database" "size" 18) }}</span>
+              <div>
+                <div class="st-title">The bytes → tie-filehost</div>
+                <div class="st-desc">
+                  Stored once, under its hash. Deduplication is a property of the model, not a
+                  cleanup job — and every download is verified.
+                </div>
+              </div>
+            </div>
+            <div class="t-store">
+              <span class="st-icon">{{ partial "icon.html" (dict "name" "tag" "size" 18) }}</span>
+              <div>
+                <div class="st-title">The meaning → triples</div>
+                <div class="st-desc">
+                  <code>tag travel</code> <code>member-of iceland</code>
+                  <code>rating 4</code> <code>path tie:/photos/2014</code>
+                  <code>taken-at 2014-06-18</code>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="t-flow-out">
+            <span class="t-out-pill"><strong>Mount</strong> as a folder</span>
+            <span class="t-out-pill"><strong>Search</strong> the words</span>
+            <span class="t-out-pill"><strong>Dedupe</strong> by content</span>
+            <span class="t-out-pill"><strong>Verify</strong> every hash</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== apps ============================== -->
+  <section class="t-section" id="apps">
+    <div class="t-wrap">
+      <div class="t-row" style="justify-content: space-between; align-items: flex-end">
+        <div style="max-width: 48rem">
+          <span class="t-eyebrow">The apps</span>
+          <h2 class="t-h2">Native tools, not a web tab.</h2>
+          <p class="t-sub">
+            Each one is a Go binary on the same library. They share a URL scheme, a theme and
+            a tag vocabulary, so a file can move from a folder to a wall to a player without
+            being copied.
+          </p>
+        </div>
+        <a class="t-btn t-btn-ghost" href="{{ "/apps/" | relURL }}">All apps {{ partial "icon.html" (dict "name" "arrow-right" "size" 15) }}</a>
+      </div>
+
+      <div class="t-grid t-grid--3 t-gap-lg">
+        {{ range slice $fm $audio $view $img $browser $anneal }}
+          {{ partial "app-card.html" (dict "app" .) }}
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== terminal ============================== -->
+  <section class="t-section t-section--soft" id="tour">
+    <div class="t-wrap">
+      <div class="t-split">
+        <div>
+          <span class="t-eyebrow">60 seconds</span>
+          <h2 class="t-h2">A library that behaves like a folder.</h2>
+          <p class="t-sub">
+            No service to run, no schema to design, no import you can't undo. Point tie at a
+            directory, then browse it by meaning.
+          </p>
+          <ul class="t-list">
+            <li><strong>Import once.</strong> Tags attach to the content hash, so a rename or a re-import never loses them.</li>
+            <li><strong>Mount it.</strong> Use Dolphin, Finder or Explorer — every path is a live tag query.</li>
+            <li><strong>Nothing is locked in.</strong> Content hashes, TSV dumps and a single-file store that backs up with rsync.</li>
+          </ul>
+          <div class="t-row" style="margin-top: 1.5rem">
+            <a class="t-btn t-btn-ghost" href="{{ "/docs/tie/getting-started/" | relURL }}">Read the quickstart</a>
+            <a class="t-btn t-btn-ghost" href="{{ "/docs/tie/guides/mount/" | relURL }}">How mounting works</a>
+          </div>
+        </div>
+
+        <div class="t-term">
+          <div class="t-term-bar">
+            <img src="{{ "brand/tie.svg" | relURL }}" alt="" />
+            <span>you@studio</span>
+            <span class="spacer" style="flex:1"></span>
+            <span>tie {{ $tie.version }}</span>
+          </div>
+          <pre class="t-term-body"><code><span class="t-p">$</span> <span class="t-cmd">tie import image-dir ~/Pictures/Holiday \</span>
+<span class="t-cmd">      --tags travel --tags 2014</span>
+<span class="t-o">  imported 214 files · 3.1 GB · 197 new blobs</span>
+<span class="t-o">  deduplicated 17 files (1.2 GB) by content</span>
+
+<span class="t-p">$</span> <span class="t-cmd">tie mount --db ~/mnt</span>
+<span class="t-o">  mounting live tree at ~/mnt</span>
+
+<span class="t-p">$</span> <span class="t-cmd">ls "~/mnt/query/travel 2014 -screenshots"</span>
+<span class="t-g">iceland/</span>  <span class="t-g">lisbon/</span>  <span class="t-g">kyoto/</span>
+
+<span class="t-p">$</span> <span class="t-cmd">tie verify --deep</span>
+<span class="t-g">  ok</span> <span class="t-o">forward 98,179,667 · reverse 4,203,118 · 0 findings</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== anneal ============================== -->
+  <section class="t-section t-band">
+    <div class="t-wrap">
+      <div class="t-split">
+        <div>
+          <span class="t-eyebrow" style="color:#c9cbd1">anneal</span>
+          <h2 class="t-h2">Work. Learn. Improve.</h2>
+          <p class="t-sub" style="color:#b6b9c0">
+            anneal is a local-first coding agent built on tie. It works with tools, reviews
+            finished sessions while idle, and proposes changes to its own harness — with
+            evidence, and only if you promote them.
+          </p>
+          <div class="t-anneal-steps">
+            <div class="step">
+              <span class="n">01</span>
+              <div><strong>Work</strong> Chat with tools, approvals, a queue and a turn budget. Plan first, then build.</div>
+            </div>
+            <div class="step">
+              <span class="n">02</span>
+              <div><strong>Learn</strong> Project memory, agent-authored skills and session recall, all stored in tie.</div>
+            </div>
+            <div class="step">
+              <span class="n">03</span>
+              <div><strong>Improve</strong> Propose, probe, compose. A successor harness is tested before it can be promoted.</div>
+            </div>
+          </div>
+          <div class="t-row" style="margin-top: 1.6rem">
+            <a class="t-btn t-btn-primary" href="{{ $anneal.page | relURL }}" style="background:#e6a23c; color:#1a1204 !important">
+              Meet anneal {{ partial "icon.html" (dict "name" "arrow-right" "size" 16) }}
+            </a>
+            <a class="t-btn t-btn-ghost" href="{{ "/docs/anneal/using/" | relURL }}" style="border-color:#3a3d44; color:#e6e7ea !important">Read the guide</a>
+          </div>
+        </div>
+        <div>
+          {{ partial "shot.html" (dict
+            "app" "anneal"
+            "scene" "chat"
+            "themes" "dark"
+            "title" "anneal"
+            "meta" "chat"
+            "class" "t-shot--on-dark"
+            "alt" "anneal's chat view: a tool-using session with an approval card, a plan and a task list"
+            "caption" "A permission request, a tool trail and a plan — the parts a chat window usually hides."
+          ) }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== numbers ============================== -->
+  <section class="t-section">
+    <div class="t-wrap">
+      <div class="t-row" style="justify-content: space-between; align-items: flex-end; margin-bottom: 1.4rem">
+        <div>
+          <span class="t-eyebrow">Measured, not promised</span>
+          <h2 class="t-h2" style="margin-bottom: 0">The depth is in the details.</h2>
+        </div>
+        <p class="t-sub" style="max-width: 32rem; margin: 0">
+          Every number links to the engineering note it came from. If the note changes, the
+          claim check fails.
+        </p>
+      </div>
+      <div class="t-stats">
+        <div class="t-stat">
+          <a href="{{ "/docs/tie/internals/" | relURL }}">
+            <div class="v">98.2<small>M</small></div>
+            <div class="k">associations in a real 7.4 GiB library</div>
+          </a>
+        </div>
+        <div class="t-stat">
+          <a href="{{ "/docs/tie/guides/search/" | relURL }}">
+            <div class="v">1.2<small>ms</small></div>
+            <div class="k">warm free-text query over 10k subjects</div>
+          </a>
+        </div>
+        <div class="t-stat">
+          <a href="{{ "/docs/tie/guides/direct-mode/" | relURL }}">
+            <div class="v">0</div>
+            <div class="k">servers needed with <code>tie -f</code></div>
+          </a>
+        </div>
+        <div class="t-stat">
+          <a href="{{ "/blog/81-findings/" | relURL }}">
+            <div class="v">81</div>
+            <div class="k">review findings, each fixed with a regression test</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== principles ============================== -->
+  <section class="t-section t-section--soft">
+    <div class="t-wrap">
+      <div style="max-width: 50rem">
+        <span class="t-eyebrow">How it's made</span>
+        <h2 class="t-h2">Small tools. Sharp edges filed off.</h2>
+      </div>
+      <div class="t-principles t-gap-lg">
+        <div class="t-principle">
+          <div class="pj">Local-first</div>
+          <div class="pd">The library is a file, the servers are optional, and nothing leaves your machine unless you mount it there.</div>
+        </div>
+        <div class="t-principle">
+          <div class="pj">Native, not browser-shaped</div>
+          <div class="pd">Go and Fyne. A single binary that starts in a frame, not a tab. Light and dark themes are designed, not inverted.</div>
+        </div>
+        <div class="t-principle">
+          <div class="pj">Honest engineering</div>
+          <div class="pd">Numbers are measured on the real database. Reverted experiments are written down. Limits are on the page.</div>
+        </div>
+        <div class="t-principle">
+          <div class="pj">Open and porous</div>
+          <div class="pd">BSD-3. Content addressed. TSV in and out. The Go and Python clients are first-class, not an afterthought.</div>
+        </div>
+        <div class="t-principle">
+          <div class="pj">Scriptable</div>
+          <div class="pd">fynerisor turns Fyne into a Risor canvas; anneal's Harness view is one. The UI can be extended without a rebuild.</div>
+        </div>
+        <div class="t-principle">
+          <div class="pj">Quiet by default</div>
+          <div class="pd">No telemetry, no accounts, no web fonts on this site. The only dependency is your own machine.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== start ============================== -->
+  <section class="t-section" id="start">
+    <div class="t-wrap">
+      <div style="max-width: 48rem">
+        <span class="t-eyebrow">Start here</span>
+        <h2 class="t-h2">What do you want to do?</h2>
+      </div>
+      <div class="t-grid t-grid--2 t-gap-lg">
+        <a class="t-card t-card--link t-app-hue" style="--hue:#38bdf8" href="{{ $fm.page | relURL }}">
+          <div class="t-app-head">
+            {{ partial "mark.html" (dict "id" "tie-fm" "size" "md") }}
+            <div class="t-app-name">Organise my media</div>
+          </div>
+          <p class="t-app-line">Import folders as albums or photos, tag them once, and keep the originals where they are.</p>
+          <div class="t-app-foot"><span class="t-more">tie + tie-fm →</span></div>
+        </a>
+        <a class="t-card t-card--link t-app-hue" style="--hue:#fb7185" href="{{ $audio.page | relURL }}">
+          <div class="t-app-head">
+            {{ partial "mark.html" (dict "id" "tie-audio" "size" "md") }}
+            <div class="t-app-name">Play my music</div>
+          </div>
+          <p class="t-app-line">A tag-aware player for the library you already have, with a history that feeds the shelves.</p>
+          <div class="t-app-foot"><span class="t-more">tie-audio →</span></div>
+        </a>
+        <a class="t-card t-card--link t-app-hue" style="--hue:#a3e635" href="{{ $img.page | relURL }}">
+          <div class="t-app-head">
+            {{ partial "mark.html" (dict "id" "imgview" "size" "md") }}
+            <div class="t-app-name">Just look at some images</div>
+          </div>
+          <p class="t-app-line">No library, no setup. Point imgview at a folder or an archive and it opens.</p>
+          <div class="t-app-foot"><span class="t-more">imgview →</span></div>
+        </a>
+        <a class="t-card t-card--link t-app-hue" style="--hue:#e6a23c" href="{{ $anneal.page | relURL }}">
+          <div class="t-app-head">
+            {{ partial "mark.html" (dict "id" "anneal" "size" "md") }}
+            <div class="t-app-name">Get a coding agent</div>
+          </div>
+          <p class="t-app-line">A local-first agent that works with your tools and learns from its own sessions.</p>
+          <div class="t-app-foot"><span class="t-more">anneal →</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== quote ============================== -->
+  <section class="t-section t-section--tight">
+    <div class="t-wrap">
+      <blockquote class="t-quote">
+        <p>“I wanted my music, my photos and my files in one place I could understand — not a
+        service I had to trust. tie is that place: files on disk, meaning in triples, and a
+        hash that keeps them honest.”</p>
+        <footer>— Johan Straarup, <a href="{{ "/about/" | relURL }}">the person who keeps tying things together</a></footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ============================== cta ============================== -->
+  <section class="t-section t-section--tight" style="padding-bottom: clamp(4rem, 8vw, 7rem)">
+    <div class="t-wrap t-center">
+      <h2 class="t-h2" style="margin-top:0">Take the library for a spin.</h2>
+      <p class="t-sub" style="margin: 0 auto 1.6rem">
+        One binary, a test environment and a 60-second tour. No account, no cloud, no
+        telemetry.
+      </p>
+      <div class="t-row" style="justify-content:center">
+        <a class="t-btn t-btn-primary" href="{{ "/install/" | relURL }}">Install tie</a>
+        <a class="t-btn t-btn-ghost" href="{{ "/docs/tie/getting-started/" | relURL }}">Take the tour</a>
+        <a class="t-btn t-btn-ghost" href="https://github.com/uidbz/tie">Star on GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+{{ end }}

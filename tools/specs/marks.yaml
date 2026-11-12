@@ -1,0 +1,95 @@
+# The tie logo family.
+#
+# Every mark is drawn on the same 128-unit tile with a very heavy stroke so that
+# it reads at 16 px and matches the "accidental" look of anneal's in-app logo.
+# The anneal mark keeps its original geometry; the heavy stroke is the same one
+# the Fyne renderer produces at scale 1 (10 px on a 26 px icon = 49.2 units).
+tile:
+  color: "#181819"
+  radius: 28
+
+weight: 49.2
+caps: round
+joins: round
+
+dot:
+  radius: 7
+  color: "#f5f5f5"
+
+marks:
+  - id: tie
+    name: tie
+    role: The store, the apps, and the umbrella brand
+    hue: "#2dd4bf"
+    light: "#0f766e"
+    # A bow tie: two triangles meeting at the knot. The knot holds the dot.
+    paths:
+      - "M30 34 L64 64 L30 94 Z"
+      - "M98 34 L64 64 L98 94 Z"
+    dot: [64, 64]
+
+  - id: anneal
+    name: anneal
+    role: The self-improving coding agent
+    hue: "#e6a23c"
+    light: "#b45309"
+    # The original anneal mark, unchanged. The dot sits on the apex.
+    paths:
+      - "M28 96 L64 28 L100 96"
+      - "M45 72 H83"
+    dot: [64, 28]
+
+  - id: tie-fm
+    name: tie-fm
+    role: Twin-panel file manager
+    hue: "#38bdf8"
+    light: "#0369a1"
+    # A folder with a raised tab. The dot is the clasp.
+    paths:
+      - "M32 60 H96 V94 H32 Z"
+      - "M38 42 H56"
+    dot: [64, 78]
+
+  - id: tie-audio
+    name: tie-audio
+    role: Music player
+    hue: "#fb7185"
+    light: "#be123c"
+    # Headphones: an arch with two legs. The dot is the headband jewel.
+    paths:
+      - "M32 94 V66 A32 32 0 0 1 96 66 V94"
+    dot: [64, 40]
+
+  - id: tie-view
+    name: tie-view
+    role: Tag-driven image viewer
+    hue: "#a78bfa"
+    light: "#6d28d9"
+    # A star for rating and favouriting. A slightly lighter stroke keeps the
+    # points from closing into a flower at small sizes.
+    weight: 38
+    paths:
+      - "M64 24 L74 50.2 L102 51.6 L80.2 69.3 L87.5 96.4 L64 81 L42.5 96.4 L47.8 69.3 L26 51.6 L54 50.2 Z"
+    dot: [64, 64]
+
+  - id: imgview
+    name: imgview
+    role: Fast local image and archive viewer
+    hue: "#a3e635"
+    light: "#4d7c0f"
+    # Two peaks. The valley has to be deeper than the stroke is thick or the
+    # silhouette closes into a single rock, so this mark runs a little lighter.
+    weight: 38
+    paths:
+      - "M28 96 L44 48 L64 86 L84 42 L102 96 Z"
+    dot: [84, 42]
+
+  - id: tie-browser
+    name: tie-browser
+    role: Scene browser and designer
+    hue: "#e879f9"
+    light: "#a21caf"
+    # A map pin: a place in your library.
+    paths:
+      - "M64 98 C64 98 40 72 40 54 A24 24 0 1 1 88 54 C88 72 64 98 64 98 Z"
+    dot: [64, 54]

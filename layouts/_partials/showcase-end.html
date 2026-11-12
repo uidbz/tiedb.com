@@ -1,0 +1,33 @@
+{{- /* Docs cards + closing CTA for showcase pages. */ -}}
+{{- $docs := .Params.docs -}}
+{{- with $docs }}
+<section class="t-section t-section--soft">
+  <div class="t-wrap">
+    <span class="t-eyebrow">Keep reading</span>
+    <h2 class="t-h2">The manual, the numbers, the source.</h2>
+    <div class="t-grid t-grid--3 t-gap-lg">
+      {{ range . }}
+        <a class="t-card t-card--link" href="{{ .url | relURL }}">
+          <div class="t-icon-tile">{{ partial "icon.html" (dict "name" (.icon | default "book") "size" 18) }}</div>
+          <div class="t-h3">{{ .title }}</div>
+          <p class="t-app-line">{{ .desc }}</p>
+        </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<section class="t-section t-section--tight">
+  <div class="t-wrap t-center">
+    <h2 class="t-h2" style="margin-top:0">Try it with your own files.</h2>
+    <p class="t-sub" style="margin: 0 auto 1.5rem">
+      A single binary, a local library and no account. Keep the originals where they are.
+    </p>
+    <div class="t-row" style="justify-content:center">
+      <a class="t-btn t-btn-primary" href="{{ "/install/" | relURL }}">Install</a>
+      <a class="t-btn t-btn-ghost" href="{{ "/docs/" | relURL }}">Read the docs</a>
+      <a class="t-btn t-btn-ghost" href="https://github.com/uidbz">Source ↗</a>
+    </div>
+  </div>
+</section>

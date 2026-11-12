@@ -1,0 +1,28 @@
+{{- /* Render one image resource responsively. */ -}}
+{{- $img := .img -}}
+{{- $alt := .alt | default "" -}}
+{{- $class := .class | default "" -}}
+{{- $eager := .eager | default false -}}
+{{- $sizes := .sizes | default "(max-width: 900px) 100vw, 640px" -}}
+{{- $smallW := 1280 -}}
+{{- $src := $img -}}
+{{- $srcset := "" -}}
+{{- if gt $img.Width $smallW -}}
+  {{- $small := $img.Resize (printf "%dx webp q82" $smallW) -}}
+  {{- $large := $img.Resize "1920x webp q82" -}}
+  {{- $src = $small -}}
+  {{- $srcset = printf "%s %dw, %s %dw" $small.RelPermalink $small.Width $large.RelPermalink $large.Width -}}
+{{- else -}}
+  {{- $src = $img.Resize (printf "%dx webp q84" $img.Width) -}}
+{{- end -}}
+<img
+  class="{{ $class }}"
+  src="{{ $src.RelPermalink }}"
+  {{ with $srcset }}srcset="{{ . }}" sizes="{{ $sizes }}"{{ end }}
+  width="{{ $img.Width }}"
+  height="{{ $img.Height }}"
+  alt="{{ $alt }}"
+  loading="{{ cond $eager "eager" "lazy" }}"
+  decoding="async"
+  {{ if $eager }}fetchpriority="high"{{ end }}
+/>

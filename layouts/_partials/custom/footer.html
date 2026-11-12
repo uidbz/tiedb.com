@@ -1,0 +1,60 @@
+{{- $ctx := .context -}}
+{{- $tie := index hugo.Data.facts "tie" -}}
+<div class="t-footer">
+  <div class="hextra-max-footer-width hx:mx-auto">
+    <div class="t-wrap">
+      <div class="t-footer-grid">
+        <div>
+          <a class="brand" href="{{ site.Home.RelPermalink }}">
+            <img src="{{ "brand/tie.svg" | relURL }}" alt="" width="28" height="28" />
+            tie
+          </a>
+          <p>
+            A local-first library for your files, music and photos, the native
+            apps that enjoy it, and a coding agent that learns as it works.
+          </p>
+          <p class="hx:mt-3">
+            BSD-3-Clause · Built with <a href="https://gohugo.io">Hugo</a> and
+            <a href="https://github.com/imfing/hextra">Hextra</a>.
+          </p>
+        </div>
+        <div>
+          <h3>Projects</h3>
+          <ul>
+            <li><a href="{{ "/tie/" | relURL }}">tie</a></li>
+            <li><a href="{{ "/apps/" | relURL }}">The apps</a></li>
+            <li><a href="{{ "/anneal/" | relURL }}">anneal</a></li>
+            <li><a href="{{ "/ecosystem/" | relURL }}">Ecosystem</a></li>
+            <li><a href="https://github.com/uidbz/fynerisor">fynerisor ↗</a></li>
+            <li><a href="https://github.com/uidbz/pwplay">pwplay ↗</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Documentation</h3>
+          <ul>
+            <li><a href="{{ "/docs/" | relURL }}">Docs home</a></li>
+            <li><a href="{{ "/docs/tie/getting-started/" | relURL }}">Getting started</a></li>
+            <li><a href="{{ "/docs/tie/concepts/" | relURL }}">Concepts</a></li>
+            <li><a href="{{ "/docs/tie/cli/" | relURL }}">CLI reference</a></li>
+            <li><a href="{{ "/docs/tie/changelog/" | relURL }}">Changelog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>More</h3>
+          <ul>
+            <li><a href="{{ "/blog/" | relURL }}">Stories</a></li>
+            <li><a href="{{ "/brand/" | relURL }}">Brand</a></li>
+            <li><a href="{{ "/install/" | relURL }}">Install</a></li>
+            <li><a href="{{ "/about/" | relURL }}">About</a></li>
+            <li><a href="{{ "/credits/" | relURL }}">Credits</a></li>
+            <li><a href="{{ "/index.xml" | relURL }}">RSS</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="t-footer-bottom">
+        <span>© 2023–2026 Johan Straarup. Source on <a href="https://github.com/uidbz">GitHub ↗</a>.</span>
+        <span>tie {{ $tie.version }} · no trackers, no CDNs, no web fonts.</span>
+      </div>
+    </div>
+  </div>
+</div>

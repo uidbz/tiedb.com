@@ -1,0 +1,23 @@
+{{- $app := .app -}}
+{{- $status := $app.status | default "stable" -}}
+<a class="t-card t-card--link t-app-card t-app-hue" style="--hue: {{ $app.hue }}" href="{{ $app.page | relURL }}">
+  <span class="t-card-glow"></span>
+  <div class="t-app-head">
+    {{ partial "mark.html" (dict "id" $app.id "size" "md" "alt" "") }}
+    <div>
+      <div class="t-app-name">{{ $app.name }}</div>
+      <div class="t-app-role">{{ $app.kind | default "app" }}</div>
+    </div>
+    <span class="t-spacer"></span>
+    {{ if eq $status "preview" }}
+      <span class="t-badge t-badge--warn">Preview</span>
+    {{ else }}
+      <span class="t-badge t-badge--muted">Stable</span>
+    {{ end }}
+  </div>
+  <p class="t-app-line">{{ $app.summary }}</p>
+  <div class="t-app-foot">
+    <span class="t-more">Open {{ $app.name }} →</span>
+    <span class="t-chip t-chip--plain">{{ index $app.platforms 0 }}</span>
+  </div>
+</a>

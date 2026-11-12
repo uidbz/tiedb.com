@@ -1,0 +1,5 @@
+<span class="t-row" style="gap:.4rem">
+{{- range split (.Get "items" | default (.Get 0)) "," -}}
+  <span class="t-chip">{{ . | strings.TrimSpace }}</span>
+{{- end }}
+</span>
